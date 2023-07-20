@@ -1,5 +1,3 @@
-// carModel.js
-
 const mongoose = require("mongoose");
 
 const carSchema = new mongoose.Schema(
@@ -11,14 +9,9 @@ const carSchema = new mongoose.Schema(
     description: { type: String },
     seller_info: {
       name: { type: String, required: true },
-      email: { type: String, required: true },
       phone: { type: String, required: true },
     },
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-      required: true,
-    },
+    category_id: { type: String, required: true },
     photo: { type: String, required: true },
     condition: { type: String, required: true },
   },
