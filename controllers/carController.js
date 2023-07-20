@@ -33,6 +33,7 @@ const createCar = asyncHandler(async (req, res) => {
     category_id,
     photo,
     condition,
+    advertise,
   } = req.body;
 
   const car = await Car.create({
@@ -45,6 +46,7 @@ const createCar = asyncHandler(async (req, res) => {
     category_id,
     photo,
     condition,
+    advertise,
   });
   res.status(201).json(car);
 });
@@ -78,10 +80,46 @@ const deleteCar = asyncHandler(async (req, res) => {
   res.status(200).json(deletedCar);
 });
 
+// advertise car
+
+const advertiseCar = asyncHandler(async (req, res) => {
+  const carId = req.params.id;
+  const { advertise } = req.body;
+  const advertiseCar = await Car.findByIdAndUpdate(
+    carId,
+    { advertise },
+    { new: true }
+  );
+
+  if (!advertiseCar) {
+    res.status(404);
+    throw new Error("Car not found");
+  }
+
+  res.status(200).json(advertiseCar);
+});
+
+// get advertised cars
+
+const getAdvertisedCars = asyncHandler(async (req, res) => {
+  const advertisedCars = await Car.find({ advertise: false });
+
+  if (!advertisedCars) {
+    console.log("No advertised cars");
+    res.status(404);
+    throw new Error("No advertised cars found");
+  }
+
+  console.log(`Sending response ${advertisedCars}`);
+  res.status(200).json(advertisedCars);
+});
+
 module.exports = {
   getAllCars,
   getACar,
   createCar,
   updateCar,
   deleteCar,
+  advertiseCar,
+  getAdvertisedCars,
 };
