@@ -1,11 +1,10 @@
 const asyncHandler = require("express-async-handler");
-const Car = require("../models/CarModel");
+const Car = require("../models/carModel");
 
 // Get all cars
 
 const getAllCars = asyncHandler(async (req, res) => {
   const cars = await Car.find();
-  console.log(cars);
   res.status(200).json(cars);
 });
 
