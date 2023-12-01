@@ -2,14 +2,12 @@ const asyncHandler = require("express-async-handler");
 const Car = require("../models/carModel");
 
 // Get all cars
-
 const getAllCars = asyncHandler(async (req, res) => {
   const cars = await Car.find();
   res.status(200).json(cars);
 });
 
 // Get a car by id
-
 const getACar = asyncHandler(async (req, res) => {
   const car = await Car.findById(req.params.id);
   if (!car) {
@@ -20,7 +18,6 @@ const getACar = asyncHandler(async (req, res) => {
 });
 
 // Create a car
-
 const createCar = asyncHandler(async (req, res) => {
   const {
     company,
@@ -51,7 +48,6 @@ const createCar = asyncHandler(async (req, res) => {
 });
 
 // update car info
-
 const updateCar = asyncHandler(async (req, res) => {
   const carId = req.params.id;
   const updatedCarData = req.body;
@@ -69,7 +65,6 @@ const updateCar = asyncHandler(async (req, res) => {
 });
 
 // delete car
-
 const deleteCar = asyncHandler(async (req, res) => {
   const deletedCar = await Car.findByIdAndDelete(req.params.id);
   if (!deletedCar) {
@@ -80,7 +75,6 @@ const deleteCar = asyncHandler(async (req, res) => {
 });
 
 // advertise car
-
 const advertiseCar = asyncHandler(async (req, res) => {
   const carId = req.params.id;
   const { advertise } = req.body;
@@ -99,7 +93,6 @@ const advertiseCar = asyncHandler(async (req, res) => {
 });
 
 // get advertised cars
-
 const getAdvertisedCars = asyncHandler(async (req, res) => {
   const advertisedCars = await Car.find({ advertise: false });
 
