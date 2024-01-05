@@ -8,6 +8,7 @@ const saveUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     name,
     email,
+    role: "user",
   });
 
   res.status(201).json(user);
