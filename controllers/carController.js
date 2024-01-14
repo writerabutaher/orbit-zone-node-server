@@ -19,31 +19,7 @@ const getACar = asyncHandler(async (req, res) => {
 
 // Create a car
 const createCar = asyncHandler(async (req, res) => {
-  const {
-    company,
-    model,
-    year,
-    price,
-    description,
-    seller_info: { name, phone },
-    category_id,
-    photo,
-    condition,
-    advertise,
-  } = req.body;
-
-  const car = await Car.create({
-    company,
-    model,
-    year,
-    price,
-    description,
-    seller_info: { name, phone },
-    category_id,
-    photo,
-    condition,
-    advertise,
-  });
+  const car = await Car.create(req.body);
   res.status(201).json(car);
 });
 
