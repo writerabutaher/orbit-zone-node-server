@@ -4,21 +4,25 @@ const Category = require("../models/categoryModel");
 // get all categories
 const getCategories = asyncHandler(async (req, res) => {
   const categories = await Category.find();
+
   if (!categories) {
     res.status(404);
     throw new Error("No categories found");
   }
+
   res.status(200).json(categories);
 });
 
 // create category
 const createCategory = asyncHandler(async (req, res) => {
-  const { name } = req.body;
-  if (!name) {
+  const { name, image } = req.body;
+
+  if ((!name, !image)) {
     res.status(404);
     throw new Error("Please enter a category name");
   }
-  const category = await Category.create(req.body);
+
+  const category = await Category.create({ name, image });
   res.status(201).json(category);
 });
 
